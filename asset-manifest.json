@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/CounterLvl2-2/static/css/main.c264e00f.css",
+    "main.js": "/CounterLvl2-2/static/js/main.8cf35003.js",
+    "static/js/787.28cb0dcd.chunk.js": "/CounterLvl2-2/static/js/787.28cb0dcd.chunk.js",
+    "index.html": "/CounterLvl2-2/index.html",
+    "main.c264e00f.css.map": "/CounterLvl2-2/static/css/main.c264e00f.css.map",
+    "main.8cf35003.js.map": "/CounterLvl2-2/static/js/main.8cf35003.js.map",
+    "787.28cb0dcd.chunk.js.map": "/CounterLvl2-2/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c264e00f.css",
+    "static/js/main.8cf35003.js"
+  ]
+}
