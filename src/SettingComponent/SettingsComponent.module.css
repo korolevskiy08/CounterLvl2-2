@@ -1,0 +1,31 @@
+.containerWrapper{
+    width: 100%;
+}
+
+.counterWrapper{
+    width: 300px;
+    height: 300px;
+    border: 2px white solid;
+    padding-top: 20px;
+    display: grid;
+    justify-content: center;
+    background-color: #5ED2B8;
+}
+
+.counter{
+    width: 200px;
+    height: 200px;
+    border: 2px white solid;
+    background-color: #00A480;
+    font-size: 25px;
+    text-align: center;
+}
+.buttonBlock{
+    display: flex;
+    justify-content: space-around;
+}
+
+.error{
+    font-size: 20px;
+    color: red;
+}
