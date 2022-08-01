@@ -4,6 +4,7 @@ import {ButtonComponents} from "../ButtonComponents/ButtonComponents";
 
 
 type CounterComponentType = {
+    startValue: number
     maxValue: number
     counter: number
     incCounterValue: () => void
@@ -11,7 +12,7 @@ type CounterComponentType = {
     offEditMode: () => void
 }
 
-export const CounterComponent = ({counter, incCounterValue, resetCounterValue, offEditMode, maxValue}:CounterComponentType) => {
+export const CounterComponent = ({counter, incCounterValue, resetCounterValue, offEditMode, maxValue, startValue}:CounterComponentType) => {
     return (
         <div className={classes.counterWrapper}>
             <div className={classes.counter}>

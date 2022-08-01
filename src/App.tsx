@@ -1,35 +1,48 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './App.css';
 import {CounterComponent} from "./CounterComponents/CounterComponent";
 import {SettingComponents} from "./SettingComponent/SettingComponents";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "./redux/Redux-store";
+import {editModeAC} from "./redux/counterEditReducer";
+import {setCurrentValueAC} from "./redux/settingsReducer";
 
 function App() {
 
-    const getMaxValue = Number(localStorage.getItem('maxValue'))
-    const getStartValue = Number(localStorage.getItem('startValue'))
+    // const getMaxValue = Number(localStorage.getItem('maxValue'))
+    // const getStartValue = Number(localStorage.getItem('startValue'))
 
-    let [counter, setCounter] = useState(getStartValue)
-    const [editMode, setEditMode] = useState(true)
-    const [maxValue, setMaxValue] = useState(getMaxValue)
-    const [startValue, setStartValue] = useState(getStartValue)
+    // let [counter, setCounter] = useState(getStartValue)
 
-    useEffect(() => {
-        localStorage.setItem('maxValue', JSON.stringify(maxValue))
-        localStorage.setItem('startValue', JSON.stringify(startValue))
-        setCounter(startValue)
-    }, [startValue, maxValue])
+    const editMode = useSelector<AppRootStateType, boolean>( state => state.counterEditReducer.editMode)
+    const maxValue = useSelector<AppRootStateType, number>(state => state.settingsReducer.maxValue)
+    const startValue = useSelector<AppRootStateType, number>( state => state.settingsReducer.minValue)
+    const counter = useSelector<AppRootStateType, number>( state => state.settingsReducer.currentValue)
+    console.log(counter)
+    const dispatch = useDispatch()
+    // let counter = 0
+    // useEffect(() => {
+    //     localStorage.setItem('maxValue', JSON.stringify(maxValue))
+    //     localStorage.setItem('startValue', JSON.stringify(startValue))
+    //     setCounter(startValue)
+    // }, [startValue, maxValue])
 
-    const onEditMode = () => {
-        setEditMode(true)
+    const onEditMode = () => dispatch(editModeAC(true))
+    const offEditMode = () => {
+        dispatch(setCurrentValueAC(startValue))
+        dispatch(editModeAC(false))
+
     }
-    const offEditMode = () => setEditMode(false)
-    const incCounterValue = () => setCounter(++counter)
-    const resetCounterValue = () => setCounter(startValue)
+
+    const incCounterValue = () => dispatch(setCurrentValueAC(counter + 1))
+
+    const resetCounterValue = () => dispatch(setCurrentValueAC(startValue))
 
     return (
         <div className="App">
             {editMode ?
                 <CounterComponent
+                    startValue={startValue}
                     maxValue={maxValue}
                     resetCounterValue={resetCounterValue}
                     incCounterValue={incCounterValue}
@@ -40,8 +53,6 @@ function App() {
                 <SettingComponents
                     startValue={startValue}
                     maxValue={maxValue}
-                    setStartValue={setStartValue}
-                    setMaxValue={setMaxValue}
                     onEditMode={onEditMode}
                 />
             }

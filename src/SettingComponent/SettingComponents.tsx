@@ -1,23 +1,24 @@
 import React, {ChangeEvent, useState} from 'react';
 import classes from "../SettingComponent/SettingsComponent.module.css";
 import {ButtonComponents} from "../ButtonComponents/ButtonComponents";
+import {useDispatch} from "react-redux";
+import {setCurrentValueAC, setMaxValueAC, setMinValueAC} from "../redux/settingsReducer";
 
 type SettingComponents = {
     startValue: number
     maxValue: number
     onEditMode: () => void
-    setMaxValue: (value: number) => void
-    setStartValue: (value: number) => void
+
 }
 
-export const SettingComponents = ({onEditMode, setMaxValue, setStartValue, maxValue, startValue}: SettingComponents) => {
-
+export const SettingComponents = ({onEditMode, maxValue, startValue}: SettingComponents) => {
+    const dispatch = useDispatch()
     const [error, setError] = useState<string | null>()
 
     const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
         const changeMaxValue = Number(e.currentTarget.value)
         if (changeMaxValue >= 0){
-            setMaxValue(Number(changeMaxValue))
+            dispatch(setMaxValueAC(Number(changeMaxValue)))
             setError(null)
         } else if (changeMaxValue < 0) {
             setError('Start value must be greater than 0')
@@ -27,7 +28,8 @@ export const SettingComponents = ({onEditMode, setMaxValue, setStartValue, maxVa
     const onChangeStartValue = (e: ChangeEvent<HTMLInputElement>) => {
         const changeStartValue = Number(e.currentTarget.value)
         if (changeStartValue >= 0){
-            setStartValue(changeStartValue)
+            dispatch(setMinValueAC(Number(changeStartValue)))
+            dispatch(setCurrentValueAC(Number(changeStartValue)))
             setError(null)
         } else if (changeStartValue < 0) {
             setError('Start value must be greater than 0')
